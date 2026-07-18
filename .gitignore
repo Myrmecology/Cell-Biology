@@ -1,0 +1,128 @@
+### =====================================================
+### SECURITY: Secrets, Credentials, Keys, YubiKey/GPG/SSH
+### =====================================================
+# Environment / secret files — every variation
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.env
+*.env.local
+*.env.development
+*.env.production
+*.env.test
+secrets/
+secret.*
+*.secret
+*credentials*
+*.credentials
+
+# API keys / tokens
+*apikey*
+*api_key*
+*.token
+.npmrc
+
+# GPG / PGP keys and keyrings (used with YubiKey OpenPGP applet)
+*.gpg
+*.pgp
+*.asc
+*.kbx
+secring.*
+pubring.*
+.gnupg/
+*.gpg-agent
+gpg-agent.conf
+
+# SSH keys (including those backed by YubiKey PIV/FIDO2 resident keys)
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+id_ecdsa
+id_ecdsa.*
+*.pem
+*.key
+*.ppk
+known_hosts
+authorized_keys
+.ssh/
+
+# YubiKey / PIV / PKCS#11 / smart card artifacts
+*.p12
+*.pfx
+*.p8
+*.pk8
+*.csr
+*.crt
+*.cer
+*.der
+*yubikey*
+*piv-cert*
+pkcs11.conf
+opensc*.conf
+
+# FIDO2 / WebAuthn credential exports (if ever dumped locally for debugging)
+*fido2*credential*
+*webauthn*credential*
+
+# Signing / commit verification artifacts that shouldn't be shared
+*.gpgsign
+.git-crypt/
+
+### =====================================================
+### Node / npm / Vite / TypeScript build artifacts
+### =====================================================
+node_modules/
+dist/
+dist-ssr/
+build/
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite
+.vite/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+### =====================================================
+### Editor / OS files
+### =====================================================
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS (in case of cross-platform collaboration)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+### =====================================================
+### Misc local-only files
+### =====================================================
+*.bak
+*.tmp
+*.swp
+.cache/

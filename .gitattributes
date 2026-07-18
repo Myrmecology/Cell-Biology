@@ -1,0 +1,29 @@
+# Normalize all text files to LF line endings in the repo
+* text=auto eol=lf
+
+# Explicitly treat these as text
+*.ts text
+*.tsx text
+*.js text
+*.jsx text
+*.json text
+*.md text
+*.css text
+*.html text
+*.yml text
+*.yaml text
+
+# Shell scripts must always use LF (Bash on Windows breaks with CRLF)
+*.sh text eol=lf
+
+# Treat these as binary — don't let git try to diff/convert them
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.glb binary
+*.gltf binary
