@@ -4,6 +4,7 @@ import { AnimalCellScene } from '@/scenes/AnimalCell/AnimalCellScene'
 import { PlantCellScene } from '@/scenes/PlantCell/PlantCellScene'
 import { ProkaryoticCellScene } from '@/scenes/ProkaryoticCell/ProkaryoticCellScene'
 import { OrganelleDetailPanel } from '@/components/panels/OrganelleDetailPanel'
+import { ComparisonPanel } from '@/components/panels/ComparisonPanel'
 import { CellTypeSwitcher } from '@/components/layout/CellTypeSwitcher'
 
 function App() {
@@ -12,8 +13,6 @@ function App() {
 
   function handleSelectCellType(cellType: CellType) {
     setActiveCellType(cellType)
-    // Clear any selected organelle when switching cells — an organelle
-    // selected in one cell type may not exist (or make sense) in another.
     setSelectedOrganelleId(null)
   }
 
@@ -40,6 +39,8 @@ function App() {
       )}
 
       <CellTypeSwitcher activeCellType={activeCellType} onSelectCellType={handleSelectCellType} />
+
+      <ComparisonPanel />
 
       <OrganelleDetailPanel
         organelleId={selectedOrganelleId}

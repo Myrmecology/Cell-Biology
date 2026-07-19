@@ -13,6 +13,10 @@ import { chloroplast } from './chloroplast'
 import { nucleoidRegion } from './nucleoidRegion'
 import { flagellum } from './flagellum'
 import { pili } from './pili'
+import { peroxisome } from './peroxisome'
+import { vesicle } from './vesicle'
+import { plasmodesma } from './plasmodesma'
+import { capsule } from './capsule'
 
 /**
  * The full registry of every organelle in the project.
@@ -33,30 +37,20 @@ export const allOrganelles: Organelle[] = [
   nucleoidRegion,
   flagellum,
   pili,
+  peroxisome,
+  vesicle,
+  plasmodesma,
+  capsule,
 ]
 
-/**
- * Fast lookup map from organelle id -> Organelle.
- * Prefer this over allOrganelles.find(...) in hot paths (e.g. per-frame 3D logic).
- */
 export const organelleById: Record<string, Organelle> = Object.fromEntries(
   allOrganelles.map((organelle) => [organelle.id, organelle])
 )
 
-/**
- * Returns every organelle that appears in a given cell type.
- * Used by scene components to determine what to render.
- */
 export function getOrganellesForCellType(cellType: CellType): Organelle[] {
   return allOrganelles.filter((organelle) => organelle.cellTypes.includes(cellType))
 }
 
-/**
- * Looks up a single organelle by id, throwing clearly if it's missing.
- * Prefer this over direct map access in places where a missing organelle
- * indicates a real bug (e.g. tour steps, quiz references) rather than
- * an expected absence.
- */
 export function getOrganelleByIdOrThrow(id: string): Organelle {
   const organelle = organelleById[id]
   if (!organelle) {
@@ -65,7 +59,6 @@ export function getOrganelleByIdOrThrow(id: string): Organelle {
   return organelle
 }
 
-// Re-export individual organelles too, in case a component needs one directly.
 export {
   mitochondrion,
   nucleus,
@@ -80,4 +73,8 @@ export {
   nucleoidRegion,
   flagellum,
   pili,
+  peroxisome,
+  vesicle,
+  plasmodesma,
+  capsule,
 }

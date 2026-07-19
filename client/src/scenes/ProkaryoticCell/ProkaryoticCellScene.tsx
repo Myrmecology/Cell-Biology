@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { SceneCanvas } from '@/scenes/SceneCanvas'
 import { OrganelleMesh } from '@/organelles/geometry/OrganelleMesh'
 import { CellBoundaryMesh } from '@/organelles/geometry/CellBoundaryMesh'
 import { AppendageMesh } from '@/organelles/geometry/AppendageMesh'
-import { getOrganellesForCellType } from '@/data/organelles'
-import { getInteriorOrganelles, getAppendageOrganelles, BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE } from '@/organelles/boundaryOrganelles'
+import { CellShellMesh } from '@/organelles/geometry/CellShellMesh'
+import { getOrganellesForCellType, organelleById } from '@/data/organelles'
+import {
+  getInteriorOrganelles,
+  getAppendageOrganelles,
+  getShellOrganelles,
+  BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE,
+} from '@/organelles/boundaryOrganelles'
+import { computeOrganelleFocusPoint } from '@/scenes/cameraFocus'
 import { useProgressStore } from '@/systems/progress/progressStore'
 
 interface ProkaryoticCellSceneProps {
@@ -21,7 +28,15 @@ export function ProkaryoticCellScene({ onOrganelleSelect }: ProkaryoticCellScene
   const allOrganellesForCell = getOrganellesForCellType(CELL_TYPE)
   const interiorOrganelles = getInteriorOrganelles(allOrganellesForCell)
   const appendageOrganelles = getAppendageOrganelles(allOrganellesForCell)
+  const shellOrganelles = getShellOrganelles(allOrganellesForCell)
   const boundaryOrganelleId = BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE[CELL_TYPE]
+
+  const focusPoint = useMemo(() => {
+    if (!selectedOrganelleId) return null
+    const organelle = organelleById[selectedOrganelleId]
+    if (!organelle) return null
+    return computeOrganelleFocusPoint(organelle, CELL_TYPE, POSITION_SPREAD)
+  }, [selectedOrganelleId])
 
   function handleSelect(organelleId: string) {
     setSelectedOrganelleId(organelleId)
@@ -30,7 +45,23 @@ export function ProkaryoticCellScene({ onOrganelleSelect }: ProkaryoticCellScene
   }
 
   return (
-    <SceneCanvas backgroundColor="#170a17" autoRotate={selectedOrganelleId === null} initialCameraDistance={14}>
+    <SceneCanvas
+      backgroundColor="#170a17"
+      autoRotate={selectedOrganelleId === null}
+      initialCameraDistance={14}
+      focusPoint={focusPoint}
+      focusDistance={3}
+    >
+      {shellOrganelles.map((organelle) => (
+        <CellShellMesh
+          key={organelle.id}
+          organelle={organelle}
+          cellType={CELL_TYPE}
+          isSelected={selectedOrganelleId === organelle.id}
+          onSelect={handleSelect}
+        />
+      ))}
+
       <CellBoundaryMesh
         cellType={CELL_TYPE}
         isSelected={selectedOrganelleId === boundaryOrganelleId}
@@ -55,7 +86,6 @@ export function ProkaryoticCellScene({ onOrganelleSelect }: ProkaryoticCellScene
           cellType={CELL_TYPE}
           isSelected={selectedOrganelleId === organelle.id}
           onSelect={handleSelect}
-          positionScale={POSITION_SPREAD}
         />
       ))}
     </SceneCanvas>

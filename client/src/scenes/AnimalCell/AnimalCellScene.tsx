@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { SceneCanvas } from '@/scenes/SceneCanvas'
 import { OrganelleMesh } from '@/organelles/geometry/OrganelleMesh'
 import { CellBoundaryMesh } from '@/organelles/geometry/CellBoundaryMesh'
 import { AppendageMesh } from '@/organelles/geometry/AppendageMesh'
-import { getOrganellesForCellType } from '@/data/organelles'
+import { getOrganellesForCellType, organelleById } from '@/data/organelles'
 import { getInteriorOrganelles, getAppendageOrganelles, BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE } from '@/organelles/boundaryOrganelles'
+import { computeOrganelleFocusPoint } from '@/scenes/cameraFocus'
 import { useProgressStore } from '@/systems/progress/progressStore'
 
 interface AnimalCellSceneProps {
@@ -23,6 +24,13 @@ export function AnimalCellScene({ onOrganelleSelect }: AnimalCellSceneProps) {
   const appendageOrganelles = getAppendageOrganelles(allOrganellesForCell)
   const boundaryOrganelleId = BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE[CELL_TYPE]
 
+  const focusPoint = useMemo(() => {
+    if (!selectedOrganelleId) return null
+    const organelle = organelleById[selectedOrganelleId]
+    if (!organelle) return null
+    return computeOrganelleFocusPoint(organelle, CELL_TYPE, POSITION_SPREAD)
+  }, [selectedOrganelleId])
+
   function handleSelect(organelleId: string) {
     setSelectedOrganelleId(organelleId)
     markOrganelleViewed(CELL_TYPE, organelleId)
@@ -30,7 +38,13 @@ export function AnimalCellScene({ onOrganelleSelect }: AnimalCellSceneProps) {
   }
 
   return (
-    <SceneCanvas backgroundColor="#0a0e17" autoRotate={selectedOrganelleId === null} initialCameraDistance={16}>
+    <SceneCanvas
+      backgroundColor="#0a0e17"
+      autoRotate={selectedOrganelleId === null}
+      initialCameraDistance={16}
+      focusPoint={focusPoint}
+      focusDistance={3.5}
+    >
       <CellBoundaryMesh
         cellType={CELL_TYPE}
         isSelected={selectedOrganelleId === boundaryOrganelleId}
@@ -55,7 +69,6 @@ export function AnimalCellScene({ onOrganelleSelect }: AnimalCellSceneProps) {
           cellType={CELL_TYPE}
           isSelected={selectedOrganelleId === organelle.id}
           onSelect={handleSelect}
-          positionScale={POSITION_SPREAD}
         />
       ))}
     </SceneCanvas>
