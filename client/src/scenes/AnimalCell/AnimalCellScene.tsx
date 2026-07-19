@@ -1,21 +1,27 @@
 import { useState } from 'react'
 import { SceneCanvas } from '@/scenes/SceneCanvas'
 import { OrganelleMesh } from '@/organelles/geometry/OrganelleMesh'
+import { CellBoundaryMesh } from '@/organelles/geometry/CellBoundaryMesh'
+import { AppendageMesh } from '@/organelles/geometry/AppendageMesh'
 import { getOrganellesForCellType } from '@/data/organelles'
+import { getInteriorOrganelles, getAppendageOrganelles, BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE } from '@/organelles/boundaryOrganelles'
 import { useProgressStore } from '@/systems/progress/progressStore'
 
 interface AnimalCellSceneProps {
-  /** Called when the user selects an organelle, so parent UI (detail panel) can respond */
   onOrganelleSelect?: (organelleId: string) => void
 }
 
 const CELL_TYPE = 'animal' as const
+const POSITION_SPREAD = 1.8
 
 export function AnimalCellScene({ onOrganelleSelect }: AnimalCellSceneProps) {
   const [selectedOrganelleId, setSelectedOrganelleId] = useState<string | null>(null)
   const markOrganelleViewed = useProgressStore((state) => state.markOrganelleViewed)
 
-  const organelles = getOrganellesForCellType(CELL_TYPE)
+  const allOrganellesForCell = getOrganellesForCellType(CELL_TYPE)
+  const interiorOrganelles = getInteriorOrganelles(allOrganellesForCell)
+  const appendageOrganelles = getAppendageOrganelles(allOrganellesForCell)
+  const boundaryOrganelleId = BOUNDARY_ORGANELLE_ID_BY_CELL_TYPE[CELL_TYPE]
 
   function handleSelect(organelleId: string) {
     setSelectedOrganelleId(organelleId)
@@ -24,28 +30,32 @@ export function AnimalCellScene({ onOrganelleSelect }: AnimalCellSceneProps) {
   }
 
   return (
-    <SceneCanvas backgroundColor="#0a0e17" autoRotate={selectedOrganelleId === null}>
-      {/* Semi-transparent outer membrane sphere, giving visual context for the cell boundary
-          without a dedicated organelle mesh blocking the view of what's inside it. */}
-      <mesh>
-        <sphereGeometry args={[5.2, 48, 48]} />
-        <meshStandardMaterial
-          color="#4fd1c5"
-          transparent
-          opacity={0.06}
-          roughness={0.1}
-          metalness={0}
-          depthWrite={false}
-        />
-      </mesh>
+    <SceneCanvas backgroundColor="#0a0e17" autoRotate={selectedOrganelleId === null} initialCameraDistance={16}>
+      <CellBoundaryMesh
+        cellType={CELL_TYPE}
+        isSelected={selectedOrganelleId === boundaryOrganelleId}
+        onSelect={handleSelect}
+      />
 
-      {organelles.map((organelle) => (
+      {interiorOrganelles.map((organelle) => (
         <OrganelleMesh
           key={organelle.id}
           organelle={organelle}
           cellType={CELL_TYPE}
           isSelected={selectedOrganelleId === organelle.id}
           onSelect={handleSelect}
+          positionScale={POSITION_SPREAD}
+        />
+      ))}
+
+      {appendageOrganelles.map((organelle) => (
+        <AppendageMesh
+          key={organelle.id}
+          organelle={organelle}
+          cellType={CELL_TYPE}
+          isSelected={selectedOrganelleId === organelle.id}
+          onSelect={handleSelect}
+          positionScale={POSITION_SPREAD}
         />
       ))}
     </SceneCanvas>

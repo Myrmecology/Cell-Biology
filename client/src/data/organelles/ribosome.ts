@@ -21,7 +21,9 @@ export const ribosome: Organelle = {
     'or attached to the rough endoplasmic reticulum in eukaryotic cells. Because every living cell ' +
     'needs to build proteins to survive, ribosomes are considered one of the most universal and ' +
     'ancient pieces of cellular machinery, found in some form across all three domains of life: ' +
-    'Bacteria, Archaea, and Eukarya.',
+    'Bacteria, Archaea, and Eukarya. A single cell typically contains thousands to tens of thousands ' +
+    'of ribosomes at any given moment — they are, by a wide margin, the most numerous structure in ' +
+    'almost any cell, though individually far smaller than organelles like the nucleus or mitochondria.',
 
   function:
     'Synthesize proteins by translating the genetic instructions carried by messenger RNA into chains ' +
@@ -44,15 +46,15 @@ export const ribosome: Organelle = {
   },
 
   scenePosition: {
-    animal: { x: 1.8, y: 1.2, z: -1.5 },
-    plant: { x: 2.1, y: 1.4, z: -1.2 },
-    prokaryotic: { x: 0.8, y: -0.6, z: 0.9 },
+    animal: { x: 2.6, y: 1.9, z: -2.1 },
+    plant: { x: 3.0, y: 2.0, z: -1.8 },
+    prokaryotic: { x: 1.4, y: -1.1, z: 1.6 },
   },
 
   sceneScale: {
-    animal: 0.3,
-    plant: 0.3,
-    prokaryotic: 0.35,
+    animal: 0.55,
+    plant: 0.55,
+    prokaryotic: 0.6,
   },
 
   animation: {
