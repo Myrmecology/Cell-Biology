@@ -59,7 +59,7 @@ export const peroxisome: Organelle = {
   },
 
   imageQuery: {
-    query: 'peroxisome organelle structure diagram',
+    query: 'peroxisome',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

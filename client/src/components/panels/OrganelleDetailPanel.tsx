@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import type { CellType } from '@/types/organelle'
 import { organelleById } from '@/data/organelles'
+import { ImageGallery } from '@/components/panels/ImageGallery'
+import { TutorPanel } from '@/components/panels/TutorPanel'
 
 interface OrganelleDetailPanelProps {
   organelleId: string | null
@@ -26,8 +28,6 @@ export function OrganelleDetailPanel({
 }: OrganelleDetailPanelProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  // Collapse back to the summary view every time a new organelle is selected,
-  // so the panel doesn't stay expanded on unrelated content between selections.
   useEffect(() => {
     setIsExpanded(false)
   }, [organelleId])
@@ -58,7 +58,6 @@ export function OrganelleDetailPanel({
             overflow: 'hidden',
           }}
         >
-          {/* Header */}
           <div
             style={{
               display: 'flex',
@@ -83,7 +82,6 @@ export function OrganelleDetailPanel({
             </button>
           </div>
 
-          {/* Scrollable body */}
           <div className="scrollable" style={{ padding: 'var(--space-lg)', overflowY: 'auto' }}>
             <p style={{ color: 'var(--color-text-primary)', marginBottom: 'var(--space-md)' }}>
               {organelle.shortDescription}
@@ -184,6 +182,16 @@ export function OrganelleDetailPanel({
                       ))}
                     </Section>
                   )}
+
+                  {organelle.imageQuery && (
+                    <Section title="Real imagery">
+                      <ImageGallery query={organelle.imageQuery.query} />
+                    </Section>
+                  )}
+
+                  <Section title="Ask the tutor">
+                    <TutorPanel organelleName={organelle.name} cellType={CELL_TYPE_LABELS[cellType]} />
+                  </Section>
                 </motion.div>
               )}
             </AnimatePresence>

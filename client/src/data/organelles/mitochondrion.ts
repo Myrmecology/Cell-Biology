@@ -60,7 +60,7 @@ export const mitochondrion: Organelle = {
   },
 
   imageQuery: {
-    query: 'mitochondria electron microscopy cristae',
+    query: 'mitochondria electron microscopy',
     fallbackAttribution: 'Electron micrograph imagery courtesy of public scientific archives.',
   },
 

@@ -62,7 +62,7 @@ export const endoplasmicReticulum: Organelle = {
   },
 
   imageQuery: {
-    query: 'endoplasmic reticulum rough smooth structure diagram',
+    query: 'endoplasmic reticulum',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

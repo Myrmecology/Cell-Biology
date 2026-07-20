@@ -64,7 +64,7 @@ export const capsule: Organelle = {
   },
 
   imageQuery: {
-    query: 'bacterial capsule polysaccharide layer diagram',
+    query: 'bacterial capsule',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

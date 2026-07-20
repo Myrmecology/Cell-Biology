@@ -60,7 +60,7 @@ export const nucleus: Organelle = {
   },
 
   imageQuery: {
-    query: 'cell nucleus chromatin electron microscopy',
+    query: 'cell nucleus',
     fallbackAttribution: 'Electron micrograph imagery courtesy of public scientific archives.',
   },
 

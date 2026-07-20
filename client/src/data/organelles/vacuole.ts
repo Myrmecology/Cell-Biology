@@ -65,7 +65,7 @@ export const vacuole: Organelle = {
   },
 
   imageQuery: {
-    query: 'plant cell central vacuole tonoplast diagram',
+    query: 'plant cell vacuole',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

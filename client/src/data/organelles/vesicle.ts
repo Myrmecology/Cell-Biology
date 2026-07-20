@@ -62,7 +62,7 @@ export const vesicle: Organelle = {
   },
 
   imageQuery: {
-    query: 'cell vesicle transport endocytosis exocytosis diagram',
+    query: 'cell vesicle',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

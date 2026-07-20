@@ -64,7 +64,7 @@ export const chloroplast: Organelle = {
   },
 
   imageQuery: {
-    query: 'chloroplast thylakoid grana structure diagram',
+    query: 'chloroplast',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

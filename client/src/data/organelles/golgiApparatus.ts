@@ -60,7 +60,7 @@ export const golgiApparatus: Organelle = {
   },
 
   imageQuery: {
-    query: 'golgi apparatus cisternae structure diagram',
+    query: 'golgi apparatus',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

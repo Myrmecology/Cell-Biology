@@ -59,7 +59,7 @@ export const flagellum: Organelle = {
   },
 
   imageQuery: {
-    query: 'bacterial flagellum rotary motor structure diagram',
+    query: 'bacterial flagellum',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

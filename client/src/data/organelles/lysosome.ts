@@ -60,7 +60,7 @@ export const lysosome: Organelle = {
   },
 
   imageQuery: {
-    query: 'lysosome structure digestive enzymes diagram',
+    query: 'lysosome',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

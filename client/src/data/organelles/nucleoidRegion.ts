@@ -60,7 +60,7 @@ export const nucleoidRegion: Organelle = {
   },
 
   imageQuery: {
-    query: 'bacterial nucleoid region DNA structure diagram',
+    query: 'bacterial nucleoid',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

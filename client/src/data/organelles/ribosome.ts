@@ -64,7 +64,7 @@ export const ribosome: Organelle = {
   },
 
   imageQuery: {
-    query: 'ribosome structure mRNA translation diagram',
+    query: 'ribosome structure',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

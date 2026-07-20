@@ -64,7 +64,7 @@ export const cellWall: Organelle = {
   },
 
   imageQuery: {
-    query: 'plant cell wall cellulose structure diagram',
+    query: 'plant cell wall',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

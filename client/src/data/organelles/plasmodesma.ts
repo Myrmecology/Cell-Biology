@@ -65,7 +65,7 @@ export const plasmodesma: Organelle = {
   },
 
   imageQuery: {
-    query: 'plasmodesmata plant cell wall channel diagram',
+    query: 'plasmodesmata',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

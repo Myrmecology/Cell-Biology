@@ -57,7 +57,7 @@ export const pili: Organelle = {
   },
 
   imageQuery: {
-    query: 'bacterial pili conjugation plasmid transfer diagram',
+    query: 'bacterial pili',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 

@@ -5,11 +5,13 @@ import { PlantCellScene } from '@/scenes/PlantCell/PlantCellScene'
 import { ProkaryoticCellScene } from '@/scenes/ProkaryoticCell/ProkaryoticCellScene'
 import { OrganelleDetailPanel } from '@/components/panels/OrganelleDetailPanel'
 import { ComparisonPanel } from '@/components/panels/ComparisonPanel'
+import { QuizModal } from '@/components/panels/QuizModal'
 import { CellTypeSwitcher } from '@/components/layout/CellTypeSwitcher'
 
 function App() {
   const [activeCellType, setActiveCellType] = useState<CellType>('animal')
   const [selectedOrganelleId, setSelectedOrganelleId] = useState<string | null>(null)
+  const [quizOrganelleId, setQuizOrganelleId] = useState<string | null>(null)
 
   function handleSelectCellType(cellType: CellType) {
     setActiveCellType(cellType)
@@ -17,8 +19,7 @@ function App() {
   }
 
   function handleStartQuiz(organelleId: string) {
-    // TODO: wire up to the quiz modal once it's built
-    console.log('Start quiz for:', organelleId)
+    setQuizOrganelleId(organelleId)
   }
 
   function handlePlayAnimation(animationId: string) {
@@ -49,6 +50,8 @@ function App() {
         onStartQuiz={handleStartQuiz}
         onPlayAnimation={handlePlayAnimation}
       />
+
+      <QuizModal organelleId={quizOrganelleId} onClose={() => setQuizOrganelleId(null)} />
     </div>
   )
 }

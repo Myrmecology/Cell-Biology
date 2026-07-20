@@ -67,7 +67,7 @@ export const cellMembrane: Organelle = {
   },
 
   imageQuery: {
-    query: 'cell membrane phospholipid bilayer fluid mosaic model',
+    query: 'cell membrane diagram',
     fallbackAttribution: 'Structural imagery courtesy of public scientific archives.',
   },
 
